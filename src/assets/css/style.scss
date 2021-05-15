@@ -1,0 +1,184 @@
+@import "mixins";
+@import "variables";
+.background{
+  position: relative;
+  .mute{
+    cursor: pointer;
+    @include position(absolute, 50%, unset, unset, 15%);
+  }
+  &:after{
+    @include position(absolute,unset,0,0,0);
+    @include size(100px, 100%);
+    content: '';
+    background:linear-gradient(180deg, #22222200 0%, #22222222 28.98%, #1f1f1f 93%);
+  }
+  img{object-fit: cover}}
+.content{
+  min-height: 45vh;
+  background: $maincolor;
+  .slides{
+    padding-left: 122px;
+    padding-top: 20px;
+    position: relative;
+    .next{
+      cursor: pointer;
+      @include position(absolute, 24%,unset,unset,120px);
+      @include display(flex,center,center,center);
+      @include border-radius(50%);
+      @include sameSize(75px);
+      background: rgba(0, 0, 0, 0.22);
+      &:hover{
+        background: rgba(0, 0, 0, 0.52);
+      }
+    }
+  }
+}
+
+.mainslider {
+  overflow-x: clip !important;
+  .slick-arrow{
+    display: none !important;
+  }
+  .slick-list{
+    padding-left: 0 !important;
+    overflow: unset;
+  }
+}
+
+.post-card{
+  background: #1F1F1F;
+  overflow: hidden;
+  border-radius: 10px;
+  transition: 0.3s all;
+  img{
+    border-radius: 10px;
+    @include size(200px,100%);
+    object-fit: cover;
+  }
+  .post-data{
+    transition: 0.3s all;
+    padding: 22px 0;
+    .post-name{
+      transition: 0.3s all;
+      display: flex;
+      justify-content: space-between;
+      p:nth-child(2){
+        display: none;
+      }
+    }
+    .post-icons{
+      @include display(flex, center,center,center);
+      visibility: hidden;
+      padding: 0 50px;
+      img{
+        margin: 10px;
+        cursor: pointer;
+        @include sameSize(45px);
+        &:nth-child(2){
+          @include sameSize(52px)
+        }
+        &:hover{
+          transition: 0.3s ease-in-out;
+          @include transform(scale(1.2));
+        }
+      }
+    }
+  }
+  &:hover{
+    transition: 0.3s ease-in-out;
+    border: 0.2px solid #0FF7F0;
+    @include transform(scale(1.1) translateY(-20px));
+    background: radial-gradient(circle, rgba(89,89,89,1) 0%, rgba(42,42,42,1) 79%);
+    .post-data{
+      padding: 22px;
+      .post-name{
+        p:nth-child(2){
+          display: block;
+        }
+      }
+    }
+    .post-icons{
+      visibility: visible;
+    }
+  }
+}
+
+.heading{
+  @include position(fixed, 0 ,0, unset, 0);
+  padding: 30px 122px;
+  z-index: 4;
+  button{
+    color: white !important;
+    background: rgba(255, 255, 255, 0.21);
+    &:hover{
+      background: rgba(255, 255, 255, 0.31);
+    }
+  }
+  .buttons{
+    position: relative;
+    .lang-buttons{
+      @include transform(rotate(90deg));
+      @include position(absolute,121px, unset,unset,-58px);
+      button{
+       span{
+         display: block;
+         @include transform(rotate(-90deg));
+         writing-mode: lr-tb;
+       }
+      }
+    }
+    margin-left: 100px;
+    button {
+      border-radius: 0 ;
+      &:nth-child(1){
+        border-top-left-radius: 0.3rem;
+        border-bottom-left-radius: 0.3rem;
+      }
+      &:last-child{
+        border-top-right-radius: 0.3rem;
+        border-bottom-right-radius: 0.3rem;
+      }
+      a{
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px){
+  .sidebar , .overlay{
+    display: none;
+  }
+}
+@media (max-width: 768px){
+  .heading{
+    padding: 20px 50px;
+  }
+  .slides{
+    padding-left: 50px !important;
+  }
+  .next{
+    display: none !important;
+  }
+}
+
+.overlay{
+  @include position(fixed,0,0,0,0);
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.4);
+}
+.sidebar{
+  background: black;
+  z-index: 1000;
+  @include position(fixed, 0 ,-100%,0, unset);
+  padding: 100px 30px;
+  transition: 0.3s ease-in-out;
+  width: 80%;
+  a{
+    font-size: 22px;
+  }
+  &.show{
+    left: 0;
+    transition: 0.3s ease-in-out;
+  }
+}
